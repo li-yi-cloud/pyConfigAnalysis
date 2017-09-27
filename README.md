@@ -10,9 +10,9 @@
     from py-ConfigAnalysis import ConfigAnalysis
     config = ConfigAnalysis()
 	config.read("analysis.conf")
-#### Get all of the keys:
+#### Get all of the key:
     config.keys()
 	->["key1","key2"]
-#### Get the value from a key
+#### Get the value from a key:
     config.get("key1")
 	->"value1"
