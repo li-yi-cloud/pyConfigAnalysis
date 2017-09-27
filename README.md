@@ -2,7 +2,7 @@
 #####   A python project that parses the configuration file for "key = value" type.
 ## Usage :
 #### analysis.conf
-    # about ...
+    # remark ...
 	key1 = value1
 	key2 = value2
 	
