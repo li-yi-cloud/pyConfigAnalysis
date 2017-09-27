@@ -1,5 +1,5 @@
 #coding:utf-8
-import re
+import re,os
 
 class ConfigAnalysis():
     def __init__(self):
@@ -16,7 +16,13 @@ class ConfigAnalysis():
     def __analysislines(self,vaild_lines):
         return [re.split(r'( |\t)*\=( |\t)*',i,maxsplit=1) for i in vaild_lines]
     def read(self,configfilename):
-        self.__config = [(item[0],item[-1]) for item in  self.__analysislines(self.__analysisfile(configfilename))]
+        if os.path.exists(configfilename):
+            if os.path.isfile(configfilename):
+                self.__config = [(item[0],item[-1]) for item in  self.__analysislines(self.__analysisfile(configfilename))]
+            else:
+                raise IOError('"%s" is not a file.'%configfilename)
+        else:
+            raise IOError('No such file or directory."%s"'%configfilename)
     def keys(self):
         return [ckey for ckey,_ in self.__config]
     def get(self,key):
