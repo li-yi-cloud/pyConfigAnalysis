@@ -1,5 +1,5 @@
 ## Help :
-#####   A python project that parses the configuration file for "key = value" type.
+#####   This is a python project that parses the configuration file for the "key = value" type.
 ## Usage :
 #### analysis.conf
     # remark ...
