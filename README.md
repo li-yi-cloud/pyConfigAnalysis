@@ -7,6 +7,7 @@
 	key2 = value2
 	
 ------------
+#### Create a ConfigAnalysis object:
     from py-ConfigAnalysis import ConfigAnalysis
     config = ConfigAnalysis()
 	config.read("analysis.conf")
