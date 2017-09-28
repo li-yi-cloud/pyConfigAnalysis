@@ -22,7 +22,7 @@ class ConfigAnalysis():
             else:
                 raise IOError('"%s" is not a file.'%configfilename)
         else:
-            raise IOError('No such file or directory."%s"'%configfilename)
+            raise FileNotFoundError('No such file or directory:"%s"'%configfilename)
     def keys(self):
         return [ckey for ckey,_ in self.__config]
     def get(self,key):
