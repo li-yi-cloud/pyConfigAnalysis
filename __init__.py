@@ -1,3 +1,3 @@
-from py-ConfigAnalysis.ConfigAnalysis import ConfigAnalysis
+from pyConfigAnalysis.ConfigAnalysis import ConfigAnalysis
 
 __all__=["ConfigAnalysis",]

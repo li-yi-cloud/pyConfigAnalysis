@@ -8,7 +8,7 @@
 	
 ------------
 #### Create a ConfigAnalysis object:
-    from py-ConfigAnalysis import ConfigAnalysis
+    from pyConfigAnalysis import ConfigAnalysis
     config = ConfigAnalysis()
 	config.read("analysis.conf")
 #### Get all of the key:
