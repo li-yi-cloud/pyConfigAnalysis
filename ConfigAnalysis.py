@@ -1,9 +1,16 @@
 #coding:utf-8
 import re,os
+try:
+    from functools import reduce
+except:
+    pass
 
 class ConfigAnalysis():
     def __init__(self):
+        self.__update_log = {}
+        self.__add_log = {}
         self.__config = None
+        self.__configfilename = None
     def __validitycheck(self,lines,configfilename):
         for line_number in range(len(lines)):
             if (not re.match(r'^#', lines[line_number])) and (not re.match(r'^(\r\n|\r|\n)',lines[line_number])) and (not re.match(r'^[a-zA-Z0-9](\w|\.| |\t)*\=( |\t)*(\S){1,}', lines[line_number])):
@@ -30,7 +37,35 @@ class ConfigAnalysis():
             if ckey == key:
                 return cvalue
         raise KeyError("Maping key not found.('%s')"%key)
-
+    def update(self,key,newvalue):
+        for i in len(self.__config):
+            if self.__config[i][0]==key:
+                self.__config[i]=(key,newvalue)
+                self.__update(key, newvalue)
+                return True
+        raise KeyError("Maping key not found.('%s')"%key)
+	def __update(self,key,newvalue):
+        self.__update_log[key]=newvalue
+    def add(self,key,value):
+        try:
+            self.update(key, value)
+            self.__update(key, value)
+        except:
+            self.__config.append(key,value)
+            self.__add_log[key]=value
+    def save(self):
+        with open(self.__configfilename,"r") as cfile:
+            clines = cfile.readlines()
+            for n in range(len(clines)):
+                for nkey in self.__update_log.keys():
+                    if re.match(r"^%s( |\t)*\=( ||\t)*(\S){1,}"%nkey, clines[n]):
+                        clines[n]=re.sub(r"^%s( |\t)*\=( ||\t)*(\S){1,}"%nkey, "%s = %s"%(nkey,self.__update_log[nkey]), clines[n])
+            if not re.match(r'.*(\r\n|\r|\n)$', clines[-1]):
+                clines[-1]=clines[-1]+"\n"
+            clines=clines+["%s = %s\n"%(nkey,self.__add_log[nkey]) for nkey in self.__add_log.keys()]
+        with open(self.__configfilename,"w") as wcfile:
+            wcfile.write(reduce(lambda x,y:x+y, clines))
+			
 if __name__=="__main__":
     pass
 
