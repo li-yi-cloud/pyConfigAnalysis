@@ -54,7 +54,7 @@ class ConfigAnalysis():
 			    raise KeyError("Unsupported Key.(The key must start with a number or letter and only support ['number','letter','_','.'])")
 		else:
 		    raise ValueError("Unsupported value.(Only support Non-blank characters)")
-	def __add(self,key,value):
+    def __add(self,key,value):
         try:
             self.update(key, value)
             self.__update(key, value)
