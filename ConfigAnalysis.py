@@ -36,9 +36,9 @@ class ConfigAnalysis():
         raise KeyError("Maping key not found.('%s')"%key)
     def update(self,key,newvalue):
         if re.match(r"(\S){1,}",newvalue) and if re.match(r"^(\S){1,}",newvalue).group()==newvalue:
-		    self.__update(key,newvalue)
-		else:
-		    raise ValueError("Unsupported value.(Only support Non-blank characters)")
+            self.__update(key,newvalue)
+        else:
+            raise ValueError("Unsupported value.(Only support Non-blank characters)")
     def __update(self,key,newvalue):
         for i in len(self.__config):
             if self.__config[i][0]==key:
@@ -48,12 +48,12 @@ class ConfigAnalysis():
         raise KeyError("Maping key not found.('%s')"%key)
     def add(self,key,value):
         if re.match(r"(\S){1,}",value) and if re.match(r"^(\S){1,}",value).group()==value:
-		    if re.match(r'^[a-zA-Z0-9](\w|\.)*$',key):
-		        self.__add(key,value)
-			else:
-			    raise KeyError("Unsupported Key.(The key must start with a number or letter and only support ['number','letter','_','.'])")
-		else:
-		    raise ValueError("Unsupported value.(Only support Non-blank characters)")
+            if re.match(r'^[a-zA-Z0-9](\w|\.)*$',key):
+                self.__add(key,value)
+            else:
+                raise KeyError("Unsupported Key.(The key must start with a number or letter and only support ['number','letter','_','.'])")
+        else:
+            raise ValueError("Unsupported value.(Only support Non-blank characters)")
     def __add(self,key,value):
         try:
             self.update(key, value)
@@ -73,7 +73,7 @@ class ConfigAnalysis():
             clines=clines+["%s = %s\n"%(nkey,self.__add_log[nkey]) for nkey in self.__add_log.keys()]
         with open(self.__configfilename,"w") as wcfile:
             wcfile.write(reduce(lambda x,y:x+y, clines))
-			
+            
 if __name__=="__main__":
     pass
 
