@@ -17,3 +17,17 @@
 #### Get the value from a key:
     config.get("key1")
 	->"value1"
+#### Update a configuration
+    config.update("key2","newvalue2")
+	#check
+	config.get("key2")
+	->"newvalue2"
+	#save to configuration file
+	config.save()
+#### Add a configuration
+    config.add("key3","value3")
+	#check
+    config.get("key3")
+	->"value3"
+	#save to configuration file
+    config.save()

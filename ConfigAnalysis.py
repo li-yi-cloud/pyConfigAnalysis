@@ -44,7 +44,7 @@ class ConfigAnalysis():
                 self.__update(key, newvalue)
                 return True
         raise KeyError("Maping key not found.('%s')"%key)
-	def __update(self,key,newvalue):
+    def __update(self,key,newvalue):
         self.__update_log[key]=newvalue
     def add(self,key,value):
         try:
