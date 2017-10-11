@@ -23,6 +23,7 @@ class ConfigAnalysis():
         if os.path.exists(configfilename):
             if os.path.isfile(configfilename):
                 self.__config = [(item[0],item[-1]) for item in  self.__analysislines(self.__analysisfile(configfilename))]
+                self.__configfilename = configfilename
             else:
                 raise IOError('"%s" is not a file.'%configfilename)
         else:
@@ -35,19 +36,19 @@ class ConfigAnalysis():
                 return cvalue
         raise KeyError("Maping key not found.('%s')"%key)
     def update(self,key,newvalue):
-        if re.match(r"(\S){1,}",newvalue) and if re.match(r"^(\S){1,}",newvalue).group()==newvalue:
+        if re.match(r"(\S){1,}",newvalue) and re.match(r"^(\S){1,}",newvalue).group()==newvalue:
             self.__update(key,newvalue)
         else:
             raise ValueError("Unsupported value.(Only support Non-blank characters)")
     def __update(self,key,newvalue):
-        for i in len(self.__config):
+        for i in range(len(self.__config)):
             if self.__config[i][0]==key:
                 self.__config[i]=(key,newvalue)
                 self.__update_log[key]=newvalue
                 return True
         raise KeyError("Maping key not found.('%s')"%key)
     def add(self,key,value):
-        if re.match(r"(\S){1,}",value) and if re.match(r"^(\S){1,}",value).group()==value:
+        if re.match(r"(\S){1,}",value) and re.match(r"^(\S){1,}",value).group()==value:
             if re.match(r'^[a-zA-Z0-9](\w|\.)*$',key):
                 self.__add(key,value)
             else:
@@ -59,7 +60,7 @@ class ConfigAnalysis():
             self.update(key, value)
             self.__update(key, value)
         except:
-            self.__config.append(key,value)
+            self.__config.append((key,value))
             self.__add_log[key]=value
     def save(self):
         with open(self.__configfilename,"r") as cfile:
