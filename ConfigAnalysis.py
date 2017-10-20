@@ -38,7 +38,7 @@ class ConfigAnalysis():
         except:
             raise KeyError("Maping key not found.('%s')"%key)
     def update(self,key,newvalue):
-        if re.match(r"(\S){1,}",newvalue) and re.match(r"^(\S){1,}",newvalue).group()==newvalue:
+        if re.match(r"(\S){1,}",str(newvalue)) and re.match(r"^(\S){1,}",str(newvalue)).group()==str(newvalue):
             self.__update(key,newvalue)
         else:
             raise ValueError("Unsupported value.(Only support Non-blank characters)")
@@ -52,8 +52,8 @@ class ConfigAnalysis():
         else:
             raise KeyError("Maping key not found.('%s')"%key)
     def add(self,key,value):
-        if re.match(r"(\S){1,}",value) and re.match(r"^(\S){1,}",value).group()==value:
-            if re.match(r'^[a-zA-Z0-9](\w|\.)*$',key):
+        if re.match(r"(\S){1,}",str(value)) and re.match(r"^(\S){1,}",str(value)).group()==str(value):
+            if re.match(r'^[a-zA-Z0-9](\w|\.)*$',str(key)):
                 self.__add(key,value)
             else:
                 raise KeyError("Unsupported Key.(The key must start with a number or letter and only support ['number','letter','_','.'])")
